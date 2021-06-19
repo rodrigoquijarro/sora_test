@@ -1,11 +1,17 @@
-#terraform {
-#  required_version = "0.12.20"
-#}
 
+# 1 Configure the AWS Provider
 provider "aws" {
     region = var.region
     #shared_credentials_file = "/var/lib/jenkins/.aws/credentials"
     profile = var.profile
+}
+
+#2. Creating VPC
+resource "aws_vpc" "inside-vpc" {
+    cidr_block = "10.0.0.0/16"
+    tags = {
+        Name = "enviroment"
+    }
 }
 
 resource "aws_instance" "site" {
