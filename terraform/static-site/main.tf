@@ -1,10 +1,11 @@
-terraform {
-  required_version = "0.12.20"
-}
+#terraform {
+#  required_version = "0.12.20"
+#}
 
 provider "aws" {
     region=var.region
-    profile=var.profile
+    shared_credentials_file = "/home/rodry/.aws/credentials"
+    profile                 = "default"
 }
 
 resource "aws_instance" "site" {
