@@ -1,6 +1,6 @@
-terraform {
-  required_version = "0.12.20"
-}
+#terraform {
+#  required_version = "0.12.20"
+#}
 
 provider "aws" {
     region=var.region
