@@ -1,12 +1,12 @@
 
-#1 Configure the AWS Provider
+# 1. Configure the AWS Provider
 provider "aws" {
     region = var.region
     #shared_credentials_file = "/var/lib/jenkins/.aws/credentials"
     profile = var.profile
 }
 
-#2 Creating VPC
+# 2. Creating VPC
 resource "aws_vpc" "inside-vpc" {
     cidr_block = "10.0.0.0/16"
     tags = {
@@ -14,11 +14,27 @@ resource "aws_vpc" "inside-vpc" {
     }
 }
 
-#3 Creating internet gateway
+# 3. Creating internet gateway
 resource "aws_internet_gateway" "gw" {
     vpc_id     = aws_vpc.inside-vpc.id
     tags = {
         Name = "subnet1"
+  }
+}
+
+# 4. Create route table
+resource "aws_route_table" "env-route-table" {
+  vpc_id = aws_vpc.inside-vpc.id
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.gw.id
+  }
+  route {
+    ipv6_cidr_block        = "::/0"
+    gateway_id = aws_internet_gateway.gw.id
+  }
+  tags = {
+    Name = "enviroment"
   }
 }
 
