@@ -49,6 +49,13 @@ resource "aws_subnet" "subnet-1" {
   } 
 }
 
+# 6. Associate subnet with route table
+
+ resource "aws_route_table_association" "association" {
+  subnet_id      = aws_subnet.subnet-1.id
+  route_table_id = aws_route_table.env-route-table.id
+}
+
 resource "aws_instance" "site" {
     ami = "ami-0194c3e07668a7e36"
     instance_type="t2.micro"
