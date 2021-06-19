@@ -1,6 +1,6 @@
-#variable "profile" {
-#    description = "The profile used to auth to AWS"
-#}
+variable "profile" {
+    description = "The profile used to auth to AWS"
+}
 
 variable "region" {
     description= "The region our instance will be in (exmpl: eu-west-2)"
