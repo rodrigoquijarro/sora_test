@@ -10,7 +10,7 @@ pipeline {
 
     stage('Checkout') {
         steps {
-            git branch: 'main', credentialsId: 'rodrigoquijarro', url: 'git@github.com:rodrigoquijarro/sora_test.git'
+            git branch: 'main', credentialsId: 'Github', url: 'git@github.com:rodrigoquijarro/sora_test.git'
         }
     }
 
