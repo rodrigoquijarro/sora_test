@@ -26,5 +26,5 @@
           become: yes
 
         - name: Run image
-          shell: docker run --name hello -dit -p 80:80 -p 443:443 scottyfullstack/nginx-static
+          shell: docker run --name hello -dit -p 80:80 -p 443:443 mailtech/apptest:latest
           become: yes

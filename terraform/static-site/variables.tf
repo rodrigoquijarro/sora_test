@@ -3,7 +3,7 @@ variable "profile" {
 }
 
 variable "region" {
-    description= "The region our instance will be in (i.e. us-east-1)"
+    description= "The region our instance will be in (exmpl: eu-west-2)"
 }
 
 variable "name" {

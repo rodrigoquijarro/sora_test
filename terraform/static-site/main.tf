@@ -8,9 +8,9 @@ provider "aws" {
 }
 
 resource "aws_instance" "site" {
-    ami = "ami-042e8287309f5df03"
+    ami = "ami-0194c3e07668a7e36"
     instance_type="t2.micro"
-    key_name="devops"
+    key_name="apptest"
     vpc_security_group_ids = ["sg-f72319ab","sg-0586fa0aa906bfb79"]
         tags = {
             Name = var.name
