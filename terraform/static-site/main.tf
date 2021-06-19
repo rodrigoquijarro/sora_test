@@ -3,9 +3,9 @@
 #}
 
 provider "aws" {
-    region=var.region
+    region = var.region
     shared_credentials_file = "/var/lib/jenkins/.aws/credentials"
-    profile                 = "DevOpsUser"
+    profile = var.profile
 }
 
 resource "aws_instance" "site" {
