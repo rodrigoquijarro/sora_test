@@ -24,7 +24,7 @@ resource "aws_internet_gateway" "gw" {
 
 # 4. Create route table
 resource "aws_route_table" "env-route-table" {
-  vpc_id = aws_vpc.inside-vpc.id
+    vpc_id = aws_vpc.inside-vpc.id
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.gw.id
@@ -33,9 +33,20 @@ resource "aws_route_table" "env-route-table" {
     ipv6_cidr_block        = "::/0"
     gateway_id = aws_internet_gateway.gw.id
   }
-  tags = {
-    Name = "enviroment"
+    tags = {
+        Name = "enviroment"
   }
+}
+
+# 5. Create a subnet
+resource "aws_subnet" "subnet-1" {
+    vpc_id = aws_vpc.inside-vpc.id
+    cidr_block =  "10.0.1.0/24" 
+    availability_zone = "eu-west-2a"
+
+    tags = {
+        Name = "enviroment-subnet"
+  } 
 }
 
 resource "aws_instance" "site" {
