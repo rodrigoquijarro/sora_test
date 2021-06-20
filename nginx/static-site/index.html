@@ -2,12 +2,26 @@
 
 <html>
 <head>
-    <title>Nginx EC2</title>
-    <link href="index.css" rel="stylesheet">
+    <title>Nginx EC2</title>
+    <link href="index.css" rel="stylesheet">
 </head>
 <body>
-    <main class="main">
-        <h1>you can do it!</h1>
-    </main>
+    <main id="x" class="main">
+        <h1>Hello world! Time is:</h1>
+    </main>
+  <script>
+  const newDiv = document.createElement("div");
+
+  var today = new Date();
+  var time = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate() + " " + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  const newContent = document.createTextNode(time);
+
+  // add the text node to the newly created div
+  newDiv.appendChild(newContent);
+
+  // add the newly created element and its content into the DOM
+  const currentDiv = document.getElementById("x");
+  document.body.insertBefore(newDiv, currentDiv);
+  </script>
 </body>
 </html>
