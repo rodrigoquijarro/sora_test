@@ -52,6 +52,7 @@ resource "aws_security_group" "instance" {
     protocol         = "-1"
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
+  }  
 }
 ## Creating Launch Configuration
 resource "aws_launch_configuration" "timeisweb" {
