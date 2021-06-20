@@ -112,16 +112,16 @@ resource "aws_network_interface" "web-server-nic" {
 
 # 9. Create elastic IP
 
-resource "aws_eip" "one" {
-    count = length(aws_instance.site) 
-    vpc                       = true
-    network_interface         = aws_network_interface.web-server-nic.id
-    associate_with_private_ip = "10.0.1.50"
-    depends_on = [aws_internet_gateway.gw]
-        tags = {
-            Name = "Enviroment_Elastic_IP"
-        }
-}
+# resource "aws_eip" "one" {
+#     count = length(aws_instance.site) 
+#     vpc                       = true
+#     network_interface         = aws_network_interface.web-server-nic.id
+#     associate_with_private_ip = "10.0.1.50"
+#     depends_on = [aws_internet_gateway.gw]
+#         tags = {
+#             Name = "Enviroment_Elastic_IP"
+#         }
+# }
 
 resource "aws_instance" "site" {
     ami = "ami-0194c3e07668a7e36"
