@@ -126,7 +126,7 @@ resource "aws_eip" "one" {
 resource "aws_instance" "site" {
     ami = var.ami
     instance_type = var.instance_type
-    key_name = var.key_name
+    key_name = "apptest"
     vpc_security_group_ids = ["sg-0066adba3fba96c74"]
         tags = {
             Name = var.name
