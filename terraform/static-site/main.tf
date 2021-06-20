@@ -35,6 +35,7 @@ resource "aws_route_table" "env-route-table" {
   }
         tags = {
             Name = "enviroment"
+  }          
 }
 
 # 5. Create a subnet
@@ -117,14 +118,14 @@ resource "aws_eip" "one" {
     associate_with_private_ip = "10.0.1.50"
     depends_on = [aws_internet_gateway.gw]
         tags = {
-            Name = "Enviroment_Elastic_IP "
-  }
+            Name = "Enviroment_Elastic_IP"
+        }
 }
 
 resource "aws_instance" "site" {
     ami = "ami-0194c3e07668a7e36"
-    instance_type = "t2.micro"
-    key_name = "apptest"
+    instance_type="t2.micro"
+    key_name="apptest"
     vpc_security_group_ids = ["sg-0066adba3fba96c74"]
         tags = {
             Name = var.name
