@@ -78,8 +78,7 @@ resource "aws_security_group" "allow_web" {
 #   ipv6_cidr_blocks = [aws_vpc.main.ipv6_cidr_block]
   }
   ingress {
-    description      = "HTTP tags = {
-    Name = "enviroment" from VPC"
+    description      = "HTTP from VPC"
     from_port        = 80
     to_port          = 80
     protocol         = "tcp"
@@ -123,8 +122,8 @@ resource "aws_eip" "one" {
 }
 
 resource "aws_instance" "site" {
-    ami = var.ami
-    instance_type = var.instance_type
+    ami = "ami-0194c3e07668a7e36"
+    instance_type = "t2.micro"
     key_name = "apptest"
     vpc_security_group_ids = ["sg-0066adba3fba96c74"]
         tags = {
