@@ -33,16 +33,16 @@ resource "aws_route_table" "env-route-table" {
     ipv6_cidr_block  = "::/0"
     gateway_id = aws_internet_gateway.gw.id
   }
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
+        tags = {
+            Name = "enviroment"
 }
 
 # 5. Create a subnet
 resource "aws_subnet" "subnet-1" {
     vpc_id = aws_vpc.inside-vpc.id
     cidr_block =  "10.0.1.0/24" 
-    availability_zone = "eu-west-2a"
+#    availability_zone = "eu-west-2a"
+    azn = var.azn
         tags = {
             Name = "enviroment-subnet"
   } 
@@ -78,7 +78,8 @@ resource "aws_security_group" "allow_web" {
 #   ipv6_cidr_blocks = [aws_vpc.main.ipv6_cidr_block]
   }
   ingress {
-    description      = "HTTP from VPC"
+    description      = "HTTP tags = {
+    Name = "enviroment" from VPC"
     from_port        = 80
     to_port          = 80
     protocol         = "tcp"
