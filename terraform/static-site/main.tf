@@ -9,16 +9,16 @@ provider "aws" {
 # 2. Creating VPC
 resource "aws_vpc" "inside-vpc" {
     cidr_block = "10.0.0.0/16"
-    tags = {
-        Name = "enviroment"
+        tags = {
+            Name = "enviroment"
     }
 }
 
 # 3. Creating internet gateway
 resource "aws_internet_gateway" "gw" {
     vpc_id     = aws_vpc.inside-vpc.id
-    tags = {
-        Name = "subnet1"
+        tags = {
+            Name = "subnet1"
   }
 }
 
@@ -33,8 +33,8 @@ resource "aws_route_table" "env-route-table" {
     ipv6_cidr_block        = "::/0"
     gateway_id = aws_internet_gateway.gw.id
   }
-    tags = {
-        Name = "enviroment"
+        tags = {
+            Name = "enviroment"
   }
 }
 
@@ -43,9 +43,8 @@ resource "aws_subnet" "subnet-1" {
     vpc_id = aws_vpc.inside-vpc.id
     cidr_block =  "10.0.1.0/24" 
     availability_zone = "eu-west-2a"
-
-    tags = {
-        Name = "enviroment-subnet"
+        tags = {
+            Name = "enviroment-subnet"
   } 
 }
 
@@ -94,18 +93,32 @@ resource "aws_security_group" "allow_web" {
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
-
-  tags = {
-    Name = "allow_tls"
+        tags = {
+            Name = "allow_tls"
   }
 }
 
 # 8. Create network interface
 
 resource "aws_network_interface" "web-server-nic" {
-  subnet_id       = aws_subnet.subnet-1.id
-  private_ips     = ["10.0.1.50"]
-  security_groups = [aws_security_group.allow_web.id]
+    subnet_id       = aws_subnet.subnet-1.id
+    private_ips     = ["10.0.1.50"]
+    security_groups = [aws_security_group.allow_web.id]
+        tags = {
+            Name = "enviroment_nic_in_interface"
+  }
+}
+
+# 9. Create elastic IP
+
+resource "aws_eip" "one" {
+    vpc                       = true
+    network_interface         = aws_network_interface.web-server-nic.id
+    associate_with_private_ip = "10.0.1.50"
+    depends_on = [aws_internet_gateway.gw]
+        tags = {
+            Name = "Enviroment_Elastic_IP "
+  }
 }
 
 resource "aws_instance" "site" {
