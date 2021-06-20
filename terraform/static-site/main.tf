@@ -30,12 +30,14 @@ resource "aws_route_table" "env-route-table" {
     gateway_id = aws_internet_gateway.gw.id
   }
   route {
-    ipv6_cidr_block        = "::/0"
+    ipv6_cidr_block  = "::/0"
     gateway_id = aws_internet_gateway.gw.id
   }
+#    protocol         = "-1"
+#    cidr_blocks      = ["0.0.0.0/0"]
+#    ipv6_cidr_blocks = ["::/0"]
         tags = {
-            Name = "enviroment"
-  }
+            Name = "routing_table"
 }
 
 # 5. Create a subnet
@@ -102,7 +104,7 @@ resource "aws_security_group" "allow_web" {
 
 resource "aws_network_interface" "web-server-nic" {
     subnet_id       = aws_subnet.subnet-1.id
-    private_ips     = ["10.0.1.50"]
+    private_ips     = ["10.0.1.50"] 
     security_groups = [aws_security_group.allow_web.id]
         tags = {
             Name = "enviroment_nic_in_interface"
@@ -121,28 +123,28 @@ resource "aws_eip" "one" {
   }
 }
 
-# resource "aws_instance" "site" {
-#     ami = "ami-0194c3e07668a7e36"
-#     instance_type="t2.micro"
-#     key_name="apptest"
-#     vpc_security_group_ids = ["sg-0066adba3fba96c74"]
-#         tags = {
-#             Name = var.name
-#             group = var.group
-#         }
-# }
-
 resource "aws_instance" "site" {
-    ami = "ami-0194c3e07668a7e36"
-    instance_type="t2.micro"
-    key_name="apptest"
-#    vpc_security_group_ids = ["sg-0066adba3fba96c74"]
-    network_interface {
-      device_index = 0
-      network_interface_id = aws_network_interface.web-server-nic.id
-    }
+    ami = var.ami
+    instance_type = var.instance_type
+    key_name = var.key_name
+    vpc_security_group_ids = ["sg-0066adba3fba96c74"]
         tags = {
             Name = var.name
             group = var.group
         }
 }
+
+# resource "aws_instance" "site" {
+#     ami = "ami-0194c3e07668a7e36"
+#     instance_type="t2.micro"
+#     key_name="apptest"
+# #    vpc_security_group_ids = ["sg-0066adba3fba96c74"]
+#     network_interface {
+#       device_index = 0
+#       network_interface_id = aws_network_interface.web-server-nic.id
+#     }
+#         tags = {
+#             Name = var.name
+#             group = var.group
+#         }
+# 
