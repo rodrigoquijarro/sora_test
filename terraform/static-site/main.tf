@@ -123,7 +123,7 @@ resource "aws_eip" "one" {
 }
 
 resource "aws_instance" "site" {
-    ami = ami.instance_type
+    ami = var.ami
     instance_type = var.instance_type
     key_name="apptest"
     vpc_security_group_ids = ["sg-0066adba3fba96c74"]
