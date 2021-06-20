@@ -25,7 +25,7 @@ variable "ec2_count" {
 }
 
 variable "amis" {
-    description = "Base AMI instance"
+    description = "Base -ami- instance"
     default = {
         eu-west-2 = "ami-0194c3e07668a7e36"
     }
