@@ -100,6 +100,14 @@ resource "aws_security_group" "allow_web" {
   }
 }
 
+# 8. Create network interface
+
+resource "aws_network_interface" "web-server-nic" {
+  subnet_id       = aws_subnet.subnet-1.id
+  private_ips     = ["10.0.1.50"]
+  security_groups = [aws_security_group.allow_web.id]
+}
+
 resource "aws_instance" "site" {
     ami = "ami-0194c3e07668a7e36"
     instance_type="t2.micro"
