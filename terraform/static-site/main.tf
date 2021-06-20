@@ -33,9 +33,9 @@ resource "aws_route_table" "env-route-table" {
     ipv6_cidr_block        = "::/0"
     gateway_id = aws_internet_gateway.gw.id
   }
-        tags = {
-            Name = "enviroment"
-  }
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
 }
 
 # 5. Create a subnet
