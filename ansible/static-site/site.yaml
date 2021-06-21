@@ -1,6 +1,6 @@
 ---
     - name: Provision Web Servers
-      hosts: tag_group_web
+      hosts: all
       tasks:
     
         - name: Install pip3
