@@ -1,6 +1,6 @@
 ---
     - name: Provision Web Servers
-      hosts: aws_ec2
+      hosts: all
       tasks:
     
         - name: Install pip3

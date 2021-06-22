@@ -100,9 +100,9 @@ resource "aws_elb" "timeisweb" {
   security_groups = ["${aws_security_group.elb.id}"]
   availability_zones = ["${data.aws_availability_zones.all.names[0]}"]
   health_check {
-    healthy_threshold = 2
-    unhealthy_threshold = 2
-    timeout = 3
+    healthy_threshold = 4
+    unhealthy_threshold = 4
+    timeout = 4
     interval = 60
     target = "HTTP:443/"
   }
