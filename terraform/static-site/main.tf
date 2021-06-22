@@ -71,6 +71,7 @@ resource "aws_autoscaling_group" "timeisweb" {
   min_size = 2
   max_size = 4
   load_balancers = ["${aws_elb.timeisweb.name}"]
+  health_check_grace_period = 300
   health_check_type = "ELB"
   tag {
     key = "Name"
@@ -100,10 +101,10 @@ resource "aws_elb" "timeisweb" {
   security_groups = ["${aws_security_group.elb.id}"]
   availability_zones = ["${data.aws_availability_zones.all.names[0]}"]
   health_check {
-    healthy_threshold = 6
-    unhealthy_threshold = 6
-    timeout = 6
-    interval = 120
+    healthy_threshold = 2
+    unhealthy_threshold = 2
+    timeout = 3
+    interval = 30
     target = "HTTP:443/"
   }
   listener {
