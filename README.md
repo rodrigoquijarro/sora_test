@@ -14,19 +14,25 @@ Before you begin, ensure you have met the following requirements:
 * You have a `<Windows/Linux/Mac>` machine. State which OS is supported/which is not.
 * You have read `<guide/link/documentation_related_to_project>`.
 
-## Installing <project_name>
+## Installing <sora_test>
 
-To install <project_name>, follow these steps:
+To install <sora_test>, follow these steps:
 
-Linux and macOS:
+Application
 ```
 <install_command>
 ```
 
-Windows:
+IaC to provision an instance:
 ```
 <install_command>
 ```
+
+Automate the bootstrapping of the application
+```
+<install_command>
+```
+
 ## Using <project_name>
 
 To use <project_name>, follow these steps:
@@ -53,9 +59,8 @@ Alternatively see the GitHub documentation on [creating a pull request](https://
 
 Thanks to the following people who have contributed to this project:
 
-* [@scottydocs](https://github.com/scottydocs) 📖
-* [@cainwatson](https://github.com/cainwatson) 🐛
-* [@calchuchesta](https://github.com/calchuchesta) 🐛
+* [rodrigoquijarro@gmail.com](https://github.com/scottydocs) 📖
+* [@rquijarro] 🐛
 
 You might want to consider using something like the [All Contributors](https://github.com/all-contributors/all-contributors) specification and its [emoji key](https://allcontributors.org/docs/en/emoji-key).
 
