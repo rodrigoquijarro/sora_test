@@ -1,11 +1,16 @@
-FROM nginx
+FROM node:14
 
-RUN mkdir /etc/nginx/private /etc/nginx/certs
-COPY static-site/index.html /etc/nginx/html/
-COPY static-site/index.css /etc/nginx/html/
-COPY static-site/nginx.conf /etc/nginx/nginx.conf
+#1. Creating app directory
+WORKDIR /usr/src/app
 
-RUN openssl req -x509 -nodes -days 365 \
--subj  "/C=US/ST=FL/O=Parlor Design, LLC/CN=scottyfullstack.com" \
--newkey rsa:2048 -keyout /etc/nginx/private/nginx-selfsigned.key \
--out /etc/nginx/certs/nginx-selfsigned.crt;
+#2. Installing app dependencies
+#3. Wildcard used to ensure both package.json AND package-lock.json are copied
+COPY testapp/package*.json ./
+
+#4. Running npm
+RUN npm install
+
+#5. Bundle testapp source
+COPY testapp/. .
+EXPOSE 443
+CMD [ "node", "appserver.js" ]
