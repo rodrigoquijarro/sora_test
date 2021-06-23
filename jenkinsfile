@@ -20,10 +20,10 @@ pipeline {
           if (params.Action == "apply") {
             sh 'whoami'
             sh 'terraform -chdir=terraform/static-site init'
-            sh 'terraform -chdir=terraform/static-site apply -var "name=hello" -var "group=web" -var "region=eu-west-2" -var "profile=DevOpsUser" --auto-approve'
+            sh 'terraform -chdir=terraform/static-site apply -var "group=web" -var "profile=DevOpsUser" --auto-approve'
           } 
           else {
-            sh 'terraform -chdir=terraform/static-site destroy -var "name=hello" -var "group=web" -var "region=eu-west-2" -var "profile=DevOpsUser" --auto-approve'
+            sh 'terraform -chdir=terraform/static-site destroy -var "group=web" -var "profile=DevOpsUser" --auto-approve'
           }
         }
       }
@@ -32,7 +32,7 @@ pipeline {
     stage('Ansible') {
       steps {
         retry(count: 5) {
-          sh 'ansible-playbook -i /etc/ansible/aws_ec2.yaml ansible/static-site/site.yaml'
+          sh 'ansible-playbook ansible/static-site/site.yaml -u ubuntu'
         }
       }
     }
