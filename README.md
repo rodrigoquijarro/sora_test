@@ -1,9 +1,8 @@
-# sora_test
+## sora_test
 
-<!--- These are examples. See https://shields.io for others or to customize this set of shields. You might want to include dependencies, project status and licence info here --->
 ![GitHub repo](https://img.shields.io/github/repo-size/rodrigoquijarro/sora_test?style=plastic)
 
-Project name is a `<utility/tool/feature>` that allows `<insert_target_audience>` to do `<action/task_it_does>`.
+Project name is a `<rodrigoquijarro/sora_test>` that allows `<Soramitsu_evaluators>` to validate `<IaC/Task>`.
 
 Additional line of information text about what the project does. Your introduction should be around 2 or 3 sentences. Don't go overboard, people won't read it.
 
