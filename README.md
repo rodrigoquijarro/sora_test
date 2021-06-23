@@ -57,13 +57,10 @@ Alternatively see the GitHub documentation on [creating a pull request](https://
 
 ## Contributors
 
-Thanks to the following people who have contributed to this project:
-
-* [rodrigoquijarro@gmail.com](https://github.com/scottydocs) 📖
-* [@rquijarro] 🐛
-
-You might want to consider using something like the [All Contributors](https://github.com/all-contributors/all-contributors) specification and its [emoji key](https://allcontributors.org/docs/en/emoji-key).
+Author:
+ 
+* [@rquijarro] - Telegram🐛
 
 ## Contact
 
-If you want to contact me you can reach me at <your_email@address.com>.
+Contact <rodrigoquijarro@gmail.com> 📖.
