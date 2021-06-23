@@ -1,6 +1,6 @@
 ---
     - name: Provision Web Servers
-      hosts: tag_Name_app_timeisweb
+      hosts: all
       tasks:
     
         - name: Install pip3
