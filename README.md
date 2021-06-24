@@ -37,11 +37,37 @@ docker push mailtech/appwebtime
 IaC to provision an instance: Terraform
 
 t2.micro
+Ingress: Port 443, 22
 
+Number of instances to create - Autoscaling
 ```
-<install_command>
+min_size = 2
+max_size = 4
 ```
+AutoScaling Group
+```
+load_balancers = ["${aws_elb.timeisweb.name}"]
+health_check_grace_period = 600
+health_check_type = "ELB"
+```
+Security Group for ELB
+Ingress: Port 443
 
+ELB configuration main points:
+```
+health_check {
+    healthy_threshold = 2
+    unhealthy_threshold = 2
+    timeout = 3
+    interval = 30
+    target = "HTTP:443/"
+
+listener {
+    lb_port = 443
+    lb_protocol = "http"
+    instance_port = "443"
+    instance_protocol = "https"
+```
 Automate the bootstrapping of the application
 ```
 <install_command>
