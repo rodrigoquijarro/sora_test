@@ -99,6 +99,7 @@ listener {
     instance_port = "443"
     instance_protocol = "https"
 ```
+At the end of the Terrafor deplyment also, two values will be provided, `<aws_instance.web.*.public_ip>`, `<aws_elb.timeisweb.dns_name>` to have a confirmation of the site availability without Jenkins intervention.
 
 ### Automate the bootstrapping of the application: Ansible 
 
@@ -150,6 +151,14 @@ The pipeline process is described as follows:
 3. Service running
 ![Screenshot from 2021-06-23 17-33-55](https://user-images.githubusercontent.com/53281151/123231059-82f83700-d4e0-11eb-8333-5218faaaa424.png)
 
+### * Security considerations
+
+* Version control
+* Remote storing state
+* No secrets storing
+* AMI-AWS for Terraform authentication
+* Jenkins profiles executors
+* Self-signed cert for testing purposes 
 
 ## 7. References
 
