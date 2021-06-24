@@ -9,13 +9,13 @@ Project name is a `<rodrigoquijarro/sora_test>` that allows `<Soramitsu_evaluato
 1. Introduction
 2. Architecture
 3. Intallation process
-* Application
-* Docker container
-* Jenkins pipeline
+    * Application
+    * Docker container
+    * Jenkins pipeline
 4. Configuration
-* IaC to provision an instance: Terraform
-* Automate the bootstrapping of the application: Ansible 
-* Deployment pipelines: Jenkins
+    * IaC to provision an instance: Terraform
+    * Automate the bootstrapping of the application: Ansible 
+    * Deployment pipelines: Jenkins
 5. Test Pipeline
 6. Results
 7. References
@@ -23,13 +23,22 @@ Project name is a `<rodrigoquijarro/sora_test>` that allows `<Soramitsu_evaluato
 
 ## 1. Introduction
 
-We have several developers teams where each member has a different OS, compiler/interpreter version, dependencies installed on the local computer. To uniform all this we use Docker containers.
-
-Your job is to automate the provisioning of instances with the application. 
+The following process was created to automate the provisioning of instances with one dockerized application called `<appwebtime>`, hosted in dockerhub under my profile `<mailtech>`. to the several developers teams with different OS, compiler/interpreter version and dependencies installed on their local computers.
 
 ## 2. Architecture
 
+The following architecture shows the process considered to complete the task:
+
 ![Screenshot from 2021-06-23 23-31-51](https://user-images.githubusercontent.com/53281151/123164791-13506080-d47c-11eb-8e99-c85c2213fe04.png)
+
+In the workstation a `<nodejs>` webapp is created, dockerized and hosted in a Dockerhub private repository, in the same local station a Jenkins' pipeline is triggered, creating a Terraform secure connection stablished with AWS CLI, to create three instances, which can accept traffic only in ports 22 and 443, the instances are created with a Launch configuration, which search the instances based on the `<ami>` and `<availability_zones>` variables declared. The EC@ instances are connected to a ELB load balancer listening just `<https>` traffic and will launch the instances accordinf to the traffic detected on port 443  
+
+The bootstrapping  is done by Ansible, based on a local configuration which has an Ansible AWS Dynamic Inventory setup, to collect the characteristics of the instances created and execute the tasks declared in `<site.yaml>`
+
+The pipeline is configured in Jenkins, firing up a job configured to check the repo in Github, Terraform stage with a `<apply>` and `<destroy>`parameterized building setup.
+
+If the process fails due to connection interruptions or delays, Ansible has a retry block configuration.
+
 
 ## 3. Installation sora_test process
 
@@ -49,6 +58,9 @@ docker push mailtech/appwebtime
 
 ### Jenkins pipeline 
 
+In the Jenkins dashboard select the option `<apply>` or `<destroy>`
+
+![Screenshot from 2021-06-24 08-47-35](https://user-images.githubusercontent.com/53281151/123224677-b768f480-d4da-11eb-920c-8e6dffdb9ea9.png)
 
 ## 4. Configuration
 
