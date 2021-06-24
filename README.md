@@ -31,11 +31,11 @@ The following architecture shows the process considered to complete the task:
 
 ![Screenshot from 2021-06-23 23-31-51](https://user-images.githubusercontent.com/53281151/123164791-13506080-d47c-11eb-8e99-c85c2213fe04.png)
 
-In the workstation a `<nodejs>` webapp is created, dockerized and hosted in a Dockerhub private repository, in the same local station a Jenkins' pipeline is triggered, creating a Terraform secure connection stablished with AWS CLI, to create three instances, which can accept traffic only in ports 22 and 443, the instances are created with a Launch configuration, which search the instances based on the `<ami>` and `<availability_zones>` variables declared. The EC@ instances are connected to a ELB load balancer listening just `<https>` traffic and will launch the instances accordinf to the traffic detected on port 443  
+In the workstation a `<nodejs>` webapp is created to shows the message `<Hello World! Time is: >`, dockerized and hosted in a Dockerhub private repository, in the same local station a Jenkins' pipeline is triggered, creating a Terraform secure connection stablished with AWS CLI to create three instances, which accept interesting traffic only in ports 22 and 443, the instances are created with a Launch configuration which search the instances based on the `<ami>` and `<availability_zones>` variables declared. The EC2 instances are connected to a ELB load balancer, listening just `<https>` traffic and will launch the number of instances according to the traffic detected on port `<443>`.  
 
-The bootstrapping  is done by Ansible, based on a local configuration which has an Ansible AWS Dynamic Inventory setup, to collect the characteristics of the instances created and execute the tasks declared in `<site.yaml>`
+The bootstrapping process is done by Ansible, based on a local configuration which has an Ansible AWS Dynamic Inventory setup, to collect the instances  characteristics and execute the tasks declared in `<site.yaml>`
 
-The pipeline is configured in Jenkins, firing up a job configured to check the repo in Github, Terraform stage with a `<apply>` and `<destroy>`parameterized building setup.
+The pipeline is configured in Jenkins, firing up a job to check the repo in Github, Terraform stage with a `<apply>` and `<destroy>` parameterized building setup and Ansible task exec.
 
 If the process fails due to connection interruptions or delays, Ansible has a retry block configuration.
 
@@ -66,27 +66,25 @@ In the Jenkins dashboard select the option `<apply>` or `<destroy>`
 
 ### IaC to provision an instance: Terraform
 
-The profile used to connect AWS can be specified in the Jenkins pipeline script and will be used with the variable profile created in `<variables.tf>`
+The profile used to connect AWS can be specified in the Jenkins pipeline script and will be used with the variable profile created in `<variables.tf>`. The following configuration is declared in `<main.tf>`
 
-t2.micro
+The `<ami>` configuration is by default as `<t2.micro>` allowing traffic just in the following ports
+```  
 Ingress: Port 443, 22
+```
 
-Number of instances to create - Autoscaling
+The number of instances to create is based on the autoscaling group with a size of:
 ```
 min_size = 2
 max_size = 4
 ```
-HA / Scaling 
-AutoScaling Group
+The High Availability and Scaling is configured in `<AutoScaling Group>` with health check parameters that waits for 5 mins until the instances are declared as `<stable>`
 ```
-load_balancers = ["${aws_elb.timeisweb.name}"]
 health_check_grace_period = 600
 health_check_type = "ELB"
 ```
-Security Group for ELB
-Ingress: Port 443
 
-ELB configuration main points:
+The ELB configuration main points are, the counters to declare an instances as `<healthy>` or `<unhealthy>`, traffic and traffic kind.
 ```
 health_check {
     healthy_threshold = 2
@@ -103,9 +101,26 @@ listener {
 ```
 
 ### Automate the bootstrapping of the application: Ansible 
+
+The bootstraping procees is configured by Ansible, for our case Ansible collects a dynamic inventory on AWS using `<boto>` and the `<AWS-ec2>` Ansible plugin. These configuration need to be setup locally in `</etc/ansible/inventory>`
+
 ```
-<install_command>
+plugin: aws_ec2
+boto_profile: 
+strict: False
+keyed_groups:
+  - key: tags
+    prefix: tag
+  - prefix: instance_type
+    key: instance_type
+  - key: placement.region
+    prefix: aws_region
 ```
+The config allow us to specify the group we want to perform the Ansible task execution, 
+
+![Screenshot from 2021-06-24 11-23-38](https://user-images.githubusercontent.com/53281151/123229135-b0dc7c00-d4de-11eb-842c-8d2702ecc00b.png)
+
+wich deploy a `<pip3>` , `<python docker sdk>` , `<docker.io>` , `<service status>` and `<Run image>` executions.
 
 ### Deployment pipelines: Jenkins
 ```
@@ -131,6 +146,7 @@ OS Hardening
 ```
 <install_command>
 ```
+![Screenshot from 2021-06-24 08-40-09](https://user-images.githubusercontent.com/53281151/123229343-e08b8400-d4de-11eb-8099-dea04dac9b10.png)
 
 ## 5. Test Pipeline
 
