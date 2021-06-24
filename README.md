@@ -87,7 +87,9 @@ Add run commands and examples you think users will find useful. Provide an optio
 4. Push to the original branch: `git push origin <project_name>/<location>`
 5. Create the pull request.
 
-## Contributors
+## References
+
+* ![Ansible AWS Dynamic Inventory](https://devopscube.com/setup-ansible-aws-dynamic-inventory/#Setup_Ansible_AWS_Dynamic_Inventory)
 
 Author:
  
