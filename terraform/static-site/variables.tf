@@ -8,11 +8,11 @@ variable "region" {
 }
 
 # variable "name" {
-#     description= "The name of the instance we are creating"
+#     description= "The name of the instance"
 # }
 
 variable "group" {
-    description= "the name of the group we will be using for Ansible purposes"
+    description= "the name of the group we will be using for Ansible"
 }
 
 variable "key_name" {

@@ -24,11 +24,20 @@ To install <sora_test>, follow these steps:
 
 Application
 ```
+npm install
+npm start
+```
+
+Docker container
+```
 docker build . -t mailtech/appwebtime --no-cache
 docker push mailtech/appwebtime
 ```
 
-IaC to provision an instance:
+IaC to provision an instance: Terraform
+
+t2.micro
+
 ```
 <install_command>
 ```
@@ -101,9 +110,9 @@ Author:
 Contact <rodrigoquijarro@gmail.com> 📖.
 
 
-## Apend
+## Append
 
-# A. Jenkins Console Output
+### A. Jenkins Console Output
 
 ```
 Started by user rodry
