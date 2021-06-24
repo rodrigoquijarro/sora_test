@@ -2,39 +2,57 @@
 
 ![GitHub repo](https://img.shields.io/github/repo-size/rodrigoquijarro/sora_test?style=plastic)
 
-Project name is a `<rodrigoquijarro/sora_test>` that allows `<Soramitsu_evaluators>` to validate `<IaC/Task>`.
+Project name is a `<rodrigoquijarro/sora_test>` that allows `<Soramitsu_evaluators>` to validate `<the provisioning of instances with the application>`.
 
-Additional line of information text about what the project does. Your introduction should be around 2 or 3 sentences. Don't go overboard, people won't read it.
 
-## Prerequisites
+## Table of contents
+1. Introduction
+2. Architecture
+3. Intallation process
+* Application
+* Docker container
+* Jenkins pipeline
+4. Configuration
+* IaC to provision an instance: Terraform
+* Automate the bootstrapping of the application: Ansible 
+* Deployment pipelines: Jenkins
+5. Test Pipeline
+6. Results
+7. References
+8. Append
 
-Before you begin, ensure you have met the following requirements:
-<!--- These are just example requirements. Add, duplicate or remove as required --->
-* You have installed the latest version of `<coding_language/dependency/requirement_1>`
-* You have a `<Windows/Linux/Mac>` machine. State which OS is supported/which is not.
-* You have read `<guide/link/documentation_related_to_project>`.
+## 1. Introduction
 
-## Architecture
+We have several developers teams where each member has a different OS, compiler/interpreter version, dependencies installed on the local computer. To uniform all this we use Docker containers.
+
+Your job is to automate the provisioning of instances with the application. 
+
+## 2. Architecture
 
 ![Screenshot from 2021-06-23 23-31-51](https://user-images.githubusercontent.com/53281151/123164791-13506080-d47c-11eb-8e99-c85c2213fe04.png)
 
-## Installing sora_test
+## 3. Installation sora_test process
 
 To install <sora_test>, follow these steps:
 
-# Application
+### Application
 ```
 npm install
 npm start
 ```
 
-# Docker container
+### Docker container
 ```
 docker build . -t mailtech/appwebtime --no-cache
 docker push mailtech/appwebtime
 ```
 
-# IaC to provision an instance: Terraform
+### Jenkins pipeline 
+
+
+## 4. Configuration
+
+### IaC to provision an instance: Terraform
 
 The profile used to connect AWS can be specified in the Jenkins pipeline script and will be used with the variable profile created in `<variables.tf>`
 
@@ -72,12 +90,12 @@ listener {
     instance_protocol = "https"
 ```
 
-# Automate the bootstrapping of the application: Ansible 
+### Automate the bootstrapping of the application: Ansible 
 ```
 <install_command>
 ```
 
-# Deployment pipelines: Jenkins
+### Deployment pipelines: Jenkins
 ```
 <install_command>
 ```
@@ -102,7 +120,7 @@ OS Hardening
 <install_command>
 ```
 
-## -sora_test- Pipeline
+## 5. Test Pipeline
 
 The oipeline process is described as follows:
 
@@ -110,7 +128,7 @@ The oipeline process is described as follows:
 
 Add run commands and examples you think users will find useful. Provide an options reference for bonus points!
 
-## Considerations
+## 6. Results
 
 1. Fork this repository.
 2. Create a branch: `git checkout -b <branch_name>`.
@@ -118,9 +136,9 @@ Add run commands and examples you think users will find useful. Provide an optio
 4. Push to the original branch: `git push origin <project_name>/<location>`
 5. Create the pull request.
 
-## References
+## 7. References
 
-* ![Terraformdocs](https://www.terraform.io/docs/index.html)
+* ![Terraform docs](https://www.terraform.io/docs/index.html)
 * ![Ansible AWS Dynamic Inventory](https://devopscube.com/setup-ansible-aws-dynamic-inventory/#Setup_Ansible_AWS_Dynamic_Inventory)
 
 Author:
@@ -132,7 +150,7 @@ Author:
 Contact <rodrigoquijarro@gmail.com> 📖.
 
 
-## Append
+## 8. Append
 
 ### A. Jenkins Console Output
 
