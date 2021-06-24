@@ -23,7 +23,7 @@ Project name is a `<rodrigoquijarro/sora_test>` that allows `<Soramitsu_evaluato
 
 ## 1. Introduction
 
-The following process was created to automate the provisioning of instances with one dockerized application called `<appwebtime>`, hosted in dockerhub under my profile `<mailtech>`. to the several developers teams with different OS, compiler/interpreter version and dependencies installed on their local computers.
+The following process was created to automate the provisioning of instances with one dockerized application called `<appwebtime>`, hosted in dockerhub under my profile `<mailtech/sora_test>`. to automate the provisioning and be used for developers teams with different OS, compiler/interpreter version and dependencies installed on their local computers.
 
 ## 2. Architecture
 
