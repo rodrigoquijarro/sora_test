@@ -22,19 +22,21 @@ Before you begin, ensure you have met the following requirements:
 
 To install <sora_test>, follow these steps:
 
-Application
+# Application
 ```
 npm install
 npm start
 ```
 
-Docker container
+# Docker container
 ```
 docker build . -t mailtech/appwebtime --no-cache
 docker push mailtech/appwebtime
 ```
 
-IaC to provision an instance: Terraform
+# IaC to provision an instance: Terraform
+
+The profile used to connect AWS can be specified in the Jenkins pipeline script and will be used with the variable profile created in `<variables.tf>`
 
 t2.micro
 Ingress: Port 443, 22
@@ -44,6 +46,7 @@ Number of instances to create - Autoscaling
 min_size = 2
 max_size = 4
 ```
+HA / Scaling 
 AutoScaling Group
 ```
 load_balancers = ["${aws_elb.timeisweb.name}"]
@@ -68,22 +71,18 @@ listener {
     instance_port = "443"
     instance_protocol = "https"
 ```
-Automate the bootstrapping of the application
+
+# Automate the bootstrapping of the application: Ansible 
 ```
 <install_command>
 ```
 
-Deployment pipelines
+# Deployment pipelines: Jenkins
 ```
 <install_command>
 ```
 
 Monitoring
-```
-<install_command>
-```
-
-HA / Scaling
 ```
 <install_command>
 ```
@@ -103,19 +102,15 @@ OS Hardening
 <install_command>
 ```
 
+## -sora_test- Pipeline
 
+The oipeline process is described as follows:
 
-## Using <project_name>
-
-To use <project_name>, follow these steps:
-
-```
-<usage_example>
-```
+![Screenshot from 2021-06-24 09-49-15](https://user-images.githubusercontent.com/53281151/123215788-8932e700-d4d1-11eb-854a-82076fba5f12.png)
 
 Add run commands and examples you think users will find useful. Provide an options reference for bonus points!
 
-## Contributing to <project_name>
+## Considerations
 
 1. Fork this repository.
 2. Create a branch: `git checkout -b <branch_name>`.
@@ -125,6 +120,7 @@ Add run commands and examples you think users will find useful. Provide an optio
 
 ## References
 
+* ![Terraformdocs](https://www.terraform.io/docs/index.html)
 * ![Ansible AWS Dynamic Inventory](https://devopscube.com/setup-ansible-aws-dynamic-inventory/#Setup_Ansible_AWS_Dynamic_Inventory)
 
 Author:

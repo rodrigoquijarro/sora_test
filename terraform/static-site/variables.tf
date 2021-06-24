@@ -7,10 +7,6 @@ variable "region" {
     default = "eu-west-2"
 }
 
-# variable "name" {
-#     description= "The name of the instance"
-# }
-
 variable "group" {
     description= "the name of the group we will be using for Ansible"
 }
