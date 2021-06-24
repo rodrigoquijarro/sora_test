@@ -123,46 +123,33 @@ The config allow us to specify the group we want to perform the Ansible task exe
 wich deploy a `<pip3>` , `<python docker sdk>` , `<docker.io>` , `<service status>` and `<Run image>` executions.
 
 ### Deployment pipelines: Jenkins
-```
-<install_command>
-```
 
-Monitoring
-```
-<install_command>
-```
+The Jenkins deployment help us to trak a deployment monitoring status, loging and metrics. Backups configurations are stored in Github
+to track versions, logging and metrics. The detailed console output can be verified in Appends.
 
-Backups
-```
-<install_command>
-```
-
-Logging/Metrics
-```
-<install_command>
-```
-
-OS Hardening
-```
-<install_command>
-```
 ![Screenshot from 2021-06-24 08-40-09](https://user-images.githubusercontent.com/53281151/123229343-e08b8400-d4de-11eb-8099-dea04dac9b10.png)
 
 ## 5. Test Pipeline
 
-The oipeline process is described as follows:
+The pipeline process is described as follows:
+
+* Chckout process with Git repository.
+* Terraform deployment.
+* Ansible task execution.
 
 ![Screenshot from 2021-06-24 09-49-15](https://user-images.githubusercontent.com/53281151/123215788-8932e700-d4d1-11eb-854a-82076fba5f12.png)
 
-Add run commands and examples you think users will find useful. Provide an options reference for bonus points!
-
 ## 6. Results
 
-1. Fork this repository.
-2. Create a branch: `git checkout -b <branch_name>`.
-3. Make your changes and commit them: `git commit -m '<commit_message>'`
-4. Push to the original branch: `git push origin <project_name>/<location>`
-5. Create the pull request.
+1. IaC deployed.
+![Screenshot from 2021-06-23 17-31-17](https://user-images.githubusercontent.com/53281151/123230936-665bff00-d4e0-11eb-90d6-639b86ca687d.png)
+
+2. Applications installed in 2 or more instances, according to the required.
+![Screenshot from 2021-06-23 17-32-52](https://user-images.githubusercontent.com/53281151/123231003-77a50b80-d4e0-11eb-8d58-68a293d32ddd.png)
+
+3. Service running
+![Screenshot from 2021-06-23 17-33-55](https://user-images.githubusercontent.com/53281151/123231059-82f83700-d4e0-11eb-8333-5218faaaa424.png)
+
 
 ## 7. References
 
