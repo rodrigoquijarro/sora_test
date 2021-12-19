@@ -1,0 +1,40 @@
+pipeline {
+  agent any
+  parameters {
+    choice(
+        name: 'Action',
+        choices: "apply\ndestroy",
+        description: 'Apply or Destroy the instance' )
+  }
+  stages {
+
+    stage('Checkout') {
+        steps {
+            git branch: 'main', credentialsId: 'rodrigoquijarro', url: 'https://github.com/rodrigoquijarro/sora_test.git'
+        }
+    }
+
+    stage('Terraform') {
+      steps {
+        script {
+          if (params.Action == "apply") {
+            sh 'whoami'
+            sh 'terraform -chdir=terraform/static-site init'
+            sh 'terraform -chdir=terraform/static-site apply -var "group=web" -var "profile=DevOpsUser" --auto-approve'
+          } 
+          else {
+            sh 'terraform -chdir=terraform/static-site destroy -var "group=web" -var "profile=DevOpsUser" --auto-approve'
+          }
+        }
+      }
+    }
+
+    stage('Ansible') {
+      steps {
+        retry(count: 5) {
+          sh 'ansible-playbook ansible/static-site/site.yaml -u ubuntu'
+        }
+      }
+    }
+  }
+}
